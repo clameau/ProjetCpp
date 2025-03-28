@@ -138,10 +138,10 @@ void startRandomQuiz(string player1, string player2, bool twoPlayers) {
     int numQuestions;
     cout << "How many questions do you want to play with? (1 - 50): ";
     numQuestions = getValidInput(1, 50); //50 questions in total so input number can not exceed 50
-
+    
     //Array to store the index of the used questions
-    bool usedQuestions[50] = {false};
-
+    bool usedQuestions[50] = {false}; 
+    
     Question selectedQuestions[numQuestions];
 
     //loop to select all the questions that will be asked
@@ -149,11 +149,11 @@ void startRandomQuiz(string player1, string player2, bool twoPlayers) {
         int randomIndex;
         //Loop to ensure that the index has not already been selected
         do {
-            randomIndex = rand() % 50;
+            randomIndex = rand() % 50;  
         } while (usedQuestions[randomIndex]);
 
         usedQuestions[randomIndex] = true;
-
+        
         selectedQuestions[i] = AllQuestions[randomIndex];
     }
 
@@ -185,7 +185,7 @@ void displayMenu() {
         cin >> player2;
         cout <<"Welcome, "<<player2<<" !\n";
     }
-
+    
     //Switch to choose the different subtopics
     int choice;
     do {
@@ -199,7 +199,7 @@ void displayMenu() {
         cout << "7. Random questions (all subjects)\n"; //Added option : player(s) answer to Random questions from various subtopics
         cout << "8. Exit\n";
         cout << "Enter your choice: ";
-
+        
         choice = getValidInput(1, 8);
 
         switch (choice) {
@@ -245,8 +245,8 @@ void displayMenu() {
                         break;
                 }
                 break;
-            case 7:
-                startRandomQuiz(player1, player2, twoPlayers);
+            case 7: 
+                startRandomQuiz(player1, player2, twoPlayers);            
                 break;
             case 8:
                 cout << "Thank you for playing!\n";
@@ -288,39 +288,39 @@ void startQuiz(Question questions[], int numQuestions, string player1, string pl
             }
         }
     }
-
+    
     //At the end of the game, scores are displayed
     cout << "\n\033[33mFinal Scores:\033[0m\n";
-    float nbRight1 = score1 / nbQuestion1;
+    float nbRight1 = (float) score1 / nbQuestion1;
     float mark1 = nbRight1 * 100;
 
     cout << player1 << ": " << score1 << "/" << nbQuestion1 << "\n";
 
     if (mark1 > 60) {
         cout << "Congrats " << player1 << ", you passed!\n";
-    }
-    else {
+    } 
+    else if (mark1<=60) {
         cout << "Sorry " << player1 << ", you failed...\n";
     }
 
     if (twoPlayers) {
-        float nbRight2 = score2 / nbQuestion2;
+        float nbRight2 = (float) score2 / nbQuestion2;
         float mark2 = nbRight2 * 100;
         cout << player2 << ": " << score2 << "/" << nbQuestion2 << "\n";
-
+    
     if (mark2 > 60) {
         cout << "Congrats " << player2 << ", you passed!\n";
-    }
+    } 
     else {
         cout << "Sorry " << player2 << ", you failed...\n";
     }
 
     if (mark1 > mark2) {
         cout << "\033[32m" << player1 << " wins!\033[0m Sorry " << player2 << ", better luck next time!" << "\n";
-    }
+    } 
     else if (mark2 > mark1) {
         cout << "\033[32m" << player2 << " wins!\033[0m Sorry " << player1 << ", better luck next time!" << "\n";
-    }
+    } 
     else {
         cout << "\033[33mIt's a tie, you both win!\033[0m\n";
     }
